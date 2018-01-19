@@ -13,15 +13,36 @@ class ImageSorter
     /** @var array $succeededFiled*/
     private $succeededFiles = array();
 
-    public function run()
+    /**
+     * @return array
+     */
+    public function getFailedFiles(): array
     {
-        $this->reset();
-        echo 'reset' . '<br>';
-        #$this->sortImages();
-        echo 'sort' . '<br>';
-        #$this->writeCsv($this->succeededFiles, self::SUCCEEDED_FILES_CSV_FILENAME);
-        #$this->writeCsv($this->failedFiles, self::FAILED_FILES_CSV_FILENAME);
-        echo 'csv' . '<br>';
+        return $this->failedFiles;
+    }
+
+    /**
+     * @param array $failedFiles
+     */
+    public function setFailedFiles(array $failedFiles): void
+    {
+        $this->failedFiles = $failedFiles;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSucceededFiles(): array
+    {
+        return $this->succeededFiles;
+    }
+
+    /**
+     * @param array $succeededFiles
+     */
+    public function setSucceededFiles(array $succeededFiles): void
+    {
+        $this->succeededFiles = $succeededFiles;
     }
 
     /**
@@ -60,7 +81,7 @@ class ImageSorter
     /**
      * Create target folder for each month
      */
-    public function createFoldersForMonths()
+    private function createFoldersForMonths()
     {
         if (!is_dir(self::TARGET_FOLDER)) {
             mkdir(self::TARGET_FOLDER);
@@ -77,7 +98,13 @@ class ImageSorter
         // TODO Add log file info
     }
 
-    private function writeCsv(array $files, string $csvFileName)
+    /**
+     * Create CSV file for succeeded and failed files
+     *
+     * @param array $files
+     * @param string $csvFileName
+     */
+    public function writeCsv(array $files, string $csvFileName)
     {
         if (count($files) > 0) {
 

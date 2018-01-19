@@ -1,1 +1,6 @@
-target_folder
+.idea/
+source_images/
+target_folders/
+failedFiles.csv
+succeededFiles.csv
+
