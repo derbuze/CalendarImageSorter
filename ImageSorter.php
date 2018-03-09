@@ -1,5 +1,7 @@
 <?php
 
+namespace ImageSorter;
+
 class ImageSorter
 {
     const TARGET_FOLDER = 'target_folders';
@@ -137,7 +139,8 @@ class ImageSorter
      *
      * @param $path
      */
-    private function removeDirectory($path) {
+    private function removeDirectory($path)
+    {
         $files = glob($path . '/*');
         foreach ($files as $file) {
             is_dir($file) ? $this->removeDirectory($file) : unlink($file);
